@@ -17,31 +17,37 @@ const reducer = (state = initialState, action) => {
         case "ADD":
             state = {
                 ...state,
-                result: state.result + action.payload
+                result: state.result + action.payload,
+                lastValues: [...state.lastValues, action.payload]
             }
             break;
         case "SUBTRACT":
             state = {
                 ...state,
-                result: state.result - action.payload
+                result: state.result - action.payload,
+                lastValues: [...state.lastValues, action.payload]
             }
             break;
         case "MULTIPLY":
             state = {
                 ...state,
-                result: state.result * action.payload
+                result: state.result * action.payload,
+                lastValues: [...state.lastValues, action.payload]
+
             }
             break;
         case "DIVIDE":
             state = {
                 ...state,
-                result: state.result / action.payload
+                result: state.result / action.payload,
+                lastValues: [...state.lastValues, action.payload]
             }
             break;
         case "REMAINDER":
             state = {
                 ...state,
-                result: state.result % action.payload
+                result: state.result % action.payload,
+                lastValues: [...state.lastValues, action.payload]
             }
             break;
         default:
