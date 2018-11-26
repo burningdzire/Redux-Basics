@@ -5,7 +5,8 @@
 import * as serviceWorker from './serviceWorker';
 
 // ReactDOM.render(<App />, document.getElementById('root'));
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import logger from 'redux-logger';
 
 const mathState = {
     result: 1,
@@ -88,7 +89,17 @@ const userReducer = (state = userState, action) => {
     return state;
 }
 
-const store = createStore(combineReducers({mathReducer:mathReducer, userReducer:userReducer}));
+// User-built logger
+const myLogger = (state) => (next) => (action) => {
+    console.log("Logged action: ", action);
+    next(action);
+}
+
+const store = createStore(
+    combineReducers({mathReducer:mathReducer, userReducer:userReducer}), 
+    {}, 
+    applyMiddleware(myLogger, logger)
+);
 
 store.subscribe(() => {
     console.log("Store Updated!!", store.getState());
