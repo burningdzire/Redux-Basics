@@ -1,11 +1,10 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import './index.css';
-// import App from './App';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
 import * as serviceWorker from './serviceWorker';
-
-// ReactDOM.render(<App />, document.getElementById('root'));
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux'
 import logger from 'redux-logger';
 
 const mathState = {
@@ -58,9 +57,9 @@ const mathReducer = (state = mathState, action) => {
 }
 
 const userState = {
-    firstName : "Mohit",
-    lastName : "Sharma",
-    age : 23
+    firstName: "Kumkum",
+    lastName: "Sharma",
+    age: 23
 };
 
 const userReducer = (state = userState, action) => {
@@ -69,13 +68,13 @@ const userReducer = (state = userState, action) => {
             state = {
                 ...state,
                 firstName: action.payload
-            }
+            };
             break;
         case "CHANGE_LAST_NAME":
             state = {
                 ...state,
                 lastName: action.payload
-            }
+            };
             break;
         case "CHANGE_AGE":
             state = {
@@ -96,8 +95,8 @@ const myLogger = (state) => (next) => (action) => {
 }
 
 const store = createStore(
-    combineReducers({mathReducer:mathReducer, userReducer:userReducer}), 
-    {}, 
+    combineReducers({ math: mathReducer, user: userReducer }),
+    {},
     applyMiddleware(myLogger, logger)
 );
 
@@ -105,25 +104,31 @@ store.subscribe(() => {
     console.log("Store Updated!!", store.getState());
 });
 
-store.dispatch({
-    type: "ADD",
-    payload: 10
-});
+// store.dispatch({
+//     type: "ADD",
+//     payload: 10
+// });
 
 
-store.dispatch({
-    type: "SUBTRACT",
-    payload: 7
-});
+// store.dispatch({
+//     type: "SUBTRACT",
+//     payload: 7
+// });
 
-store.dispatch({
-    type: "CHANGE_FIRST_NAME",
-    payload: "ROHIT"
-})
+// store.dispatch({
+//     type: "CHANGE_FIRST_NAME",
+//     payload: "ROHIT"
+// })
 
-store.dispatch({
-    type: "CHANGE_LAST_NAME",
-    payload: "SAXENA"
-})
+// store.dispatch({
+//     type: "CHANGE_LAST_NAME",
+//     payload: "SAXENA"
+// })
 
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('root')
+);
 serviceWorker.unregister();

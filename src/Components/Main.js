@@ -5,10 +5,15 @@ class Main extends Component {
         return (
             <div>
                 <div className="row">
-                    <h1>This is main page.</h1>
+                    <h1>Main Page</h1>
                 </div>
                 <div className="row">
-                    <button className="btn btn-primary" onClick={() => this.props.changeName("Rohit", "Saxena")}>Change Name</button>
+                    <button className="btn btn-primary"
+                        onClick={() => this.props.changeFirstName()}>Change Name</button>
+                    <button className="btn btn-primary"
+                        onClick={() => this.props.changeLastName()}>Change Name</button>
+                    <button className="btn btn-primary"
+                        onClick={() => this.props.changeAge()}>Change Age</button>
                 </div>
             </div>
         );
