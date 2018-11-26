@@ -1,15 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Display extends Component {
+export const Display = (props) => {
+    return (
+        <div>
+            <h3>Hi {props.firstName} {props.lastName}!</h3>
+            <h3>You are {props.age} years old.</h3>
+        </div>
+    );
 
-    render() {
-        return (
-            <div>
-                <h3>Hi {this.props.firstName} {this.props.lastName}!</h3>
-                <h3>You are {this.props.age} years old.</h3>
-            </div>
-        );
-    }
 }
-
-export default Display;

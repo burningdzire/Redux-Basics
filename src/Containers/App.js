@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import Main from './Components/Main'
-import Display from './Components/Display'
+import { Main } from '../Components/Main'
+import { Display } from '../Components/Display'
 import { connect } from 'react-redux';
 
 class App extends Component {
-
   render() {
     return (
       <div className="App">
