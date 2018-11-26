@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Main } from '../Components/Main'
-import { Display } from '../Components/Display'
+import { Main } from '../components/Main'
+import { Display } from '../components/Display'
 import { connect } from 'react-redux';
+import { changeFirstName, changeLastName, changeAge } from "../store/actions/userActions";
 
 class App extends Component {
   render() {
@@ -30,22 +31,13 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setFirstName: (newFirstName) => {
-      dispatch({
-        type: "CHANGE_FIRST_NAME",
-        payload: newFirstName
-      });
+      dispatch(changeFirstName(newFirstName));
     },
     setLastName: (newLastName) => {
-      dispatch({
-        type: "CHANGE_LAST_NAME",
-        payload: newLastName
-      });
+      dispatch(changeLastName(newLastName));
     },
     setAge: (newAge) => {
-      dispatch({
-        type: "CHANGE_AGE",
-        payload: newAge
-      });
+      dispatch(changeAge(newAge));
     }
   };
 };
