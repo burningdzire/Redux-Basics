@@ -5,14 +5,14 @@
 import * as serviceWorker from './serviceWorker';
 
 // ReactDOM.render(<App />, document.getElementById('root'));
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 
-const initialState = {
+const mathState = {
     result: 1,
     lastValues: []
 };
 
-const reducer = (state = initialState, action) => {
+const mathReducer = (state = mathState, action) => {
     switch (action.type) {
         case "ADD":
             state = {
@@ -56,7 +56,39 @@ const reducer = (state = initialState, action) => {
     return state;
 }
 
-const store = createStore(reducer);
+const userState = {
+    firstName : "Mohit",
+    lastName : "Sharma",
+    age : 23
+};
+
+const userReducer = (state = userState, action) => {
+    switch (action.type) {
+        case "CHANGE_FIRST_NAME":
+            state = {
+                ...state,
+                firstName: action.payload
+            }
+            break;
+        case "CHANGE_LAST_NAME":
+            state = {
+                ...state,
+                lastName: action.payload
+            }
+            break;
+        case "CHANGE_AGE":
+            state = {
+                ...state,
+                age: action.payload
+            }
+            break;
+        default:
+            break;
+    }
+    return state;
+}
+
+const store = createStore(combineReducers({mathReducer:mathReducer, userReducer:userReducer}));
 
 store.subscribe(() => {
     console.log("Store Updated!!", store.getState());
@@ -72,5 +104,15 @@ store.dispatch({
     type: "SUBTRACT",
     payload: 7
 });
+
+store.dispatch({
+    type: "CHANGE_FIRST_NAME",
+    payload: "ROHIT"
+})
+
+store.dispatch({
+    type: "CHANGE_LAST_NAME",
+    payload: "SAXENA"
+})
 
 serviceWorker.unregister();
