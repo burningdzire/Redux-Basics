@@ -1,7 +1,11 @@
 export function changeFirstName(newFirstName) {
     return {
         type: "CHANGE_FIRST_NAME",
-        payload: newFirstName
+        payload: new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(newFirstName);
+            }, 2000);
+        })
     };
 }
 
